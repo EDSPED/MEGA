@@ -465,21 +465,21 @@ float megaVY;
 void keyPressed
   () {
   if (page==4 || page==5) {
-    if (keyCode==UP && canJump ==1) {
+    if (keyCode==UP ||key  == 'w' || key == ' ' && canJump ==1) {
       goUp = 1;
       megaVY = -8;
     }
-    if (keyCode==DOWN) {
+    if (keyCode==DOWN || key=='s') {
       goDown = 1;
     }
-    if (keyCode==LEFT) {
-      megaD=-1;
-      goLeft =1;
-    }
-    if (keyCode==RIGHT) {
-      megaD = 1;
-      goRight = 1;
-    }
+    // if (keyCode==LEFT|| key=='a') {
+    //   megaD=-1;
+    //   goLeft =1;
+    // }
+    // if (keyCode==RIGHT|| key=='d') {
+    //  megaD = 1;
+    //  goRight = 1;
+    // }
   }
   if (goDown == 0 && page==1 && (key  == 's' || keyCode == DOWN)) {
     goDown = 1;
@@ -487,10 +487,10 @@ void keyPressed
   if (goUp == 0 && page==1 &&(key  == 'w' || keyCode == UP)) {
     goUp = 1;
   }
-  if (page==4 &&(key  == 'w' || keyCode == UP ) && canJump==1) {
-    goUp = 1;
-    megaVY = -8;
-  }
+  //  if (page==4 &&(key  == 'w' || keyCode == UP ) && canJump==1) {
+  //  goUp = 1;
+  //megaVY = -8;
+  //}
   if (page==2 && key == ENTER && shopcursorx==70+30 && coincount>=2) {
     healthmax=8;
     health=healthmax;
@@ -547,16 +547,16 @@ void keyPressed
 
 void keyReleased() {
   if (page==4 ||page==5) {
-    if (keyCode==UP) {
+    if (keyCode==UP||key  == 'w') {
       goUp = 0;
     }
-    if (keyCode==DOWN) {
+    if (keyCode==DOWN||key  == 's') {
       goDown = 0;
     }
-    if (keyCode==LEFT) {
+    if (keyCode==LEFT ||key  == 'a') {
       goLeft =0;
     }
-    if (keyCode==RIGHT) {
+    if (keyCode==RIGHT||key  == 'd') {
       goRight = 0;
     }
   }
