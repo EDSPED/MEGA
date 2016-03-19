@@ -195,6 +195,10 @@ void portalto2(int x, int y) {
   //  rect(x, y, 30, 70);
   if (megax-26>1050 && megay>y && megay-60<y+60) {
     page=5;
+    megax=180;
+    megay=100;
+    camera2X=0;
+    camera2X=0;
   }
 }
 void camera2() {
