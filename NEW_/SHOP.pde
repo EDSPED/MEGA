@@ -245,6 +245,6 @@ void shop() {
   ellipse(194, 110, 7, 7);
   textSize(10);
   fill(#FFFFFF);
-  text("10 coins", 204, 114);
+  text("5 coins", 204, 114);
   drawcoincounter(240, 240);
 }

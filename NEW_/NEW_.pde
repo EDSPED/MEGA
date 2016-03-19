@@ -64,7 +64,12 @@ void draw() {
     page5();
     a=2;
   }
-
+  if (page==6) {
+    win();
+  }
+  if (page==7) {
+    intro();
+  }
   // if (megax > width) 
   // megax = 0;
   //if (megax < 0) 
@@ -296,7 +301,7 @@ void drawMEGA(int x, float y, float s) {
   fill(0, 0);
 
   //  rect(megax-28-cameraX, megay-65-cameraY, 54, 67);
-  rect(x-15, y-65, 30, 67);
+  // rect(x-15, y-65, 30, 67);
 }
 void map1() {
   //draw all flowers
@@ -351,11 +356,7 @@ void map1() {
 
   drawcoincounter(240, 240);
 }
-//ART TAB
-void drawFlower(int x, int y, color c) {
-  fill(c);
-  ellipse(x, y, 10, 9);
-}
+
 
 void drawshop(int x, int y) {
   fill(#257BAF);
@@ -493,7 +494,7 @@ void keyPressed
   if (page==2 && key == ENTER && shopcursorx==70+30 && coincount>=2) {
     healthmax=8;
     health=healthmax;
-    coincount-=2;
+    coincount-=5;
   }
   if ((key  == 'd' || keyCode == RIGHT) && page==2) {
     if (page==2) {
@@ -536,6 +537,12 @@ void keyPressed
   if (key =='5') {
     page=5;
   }
+  if (key =='6') {
+    page=6;
+  }
+  if (key =='7') {
+    page=7;
+  }
 }
 
 void keyReleased() {
@@ -557,7 +564,7 @@ void keyReleased() {
 }
 void mousePressed() {
   //?
-  if (mouseX>shopX-cameraX && mouseX<shopX+80-cameraX && mouseY>shopY-cameraY && mouseY<shopY+80-cameraY) {
+  if ( page==1&& mouseX>shopX-cameraX && mouseX<shopX+80-cameraX && mouseY>shopY-cameraY && mouseY<shopY+80-cameraY) {
     page=2;
   } else if (page==2 && mouseX>250+100 && mouseX<250+70+100 && mouseY>140+20 && mouseY<160+20) {
     page=1;
@@ -567,6 +574,21 @@ void mousePressed() {
     megay=300;
   } else if (page==0 && mouseX>100 && mouseX<100+400 && mouseY>400 && mouseY<440) {
     page=1;
+  }
+  if (page==6 && dist(mouseX, mouseY, 500, 400)<20) {
+    page=1;
+    megax=500;
+    megay=800;
+    // cameraX=0;
+    //cameraX=0;
+  }
+  if (page==7 && dist(mouseX, mouseY, 300, 500)<20) {
+    page=1;
+    megax=200;
+    megay=200;
+  }
+  if (page==0 && dist(mouseX, mouseY, 460, 560)<20) {
+    page=7;
   }
 }
 void mouseReleased() {
@@ -945,7 +967,7 @@ void drawhearts(int x, int y) {
 }
 void drawentry(int x, int y) {
   fill(#11A75D);
-  rect(x, y, 120, 120);
+  rect(x, y, 120, 500);
   rect(x-10, y, 140, 18);
   if (megax-26>40&& megax+26<40+120 && megay>780) {
     page=4;
@@ -1090,4 +1112,30 @@ void map0() {
   fill(0);
   text("START GAME", 240, 430);
   text("- Eduardo Guzman", 300, 520);
+  ellipse(460, 560, 40, 40);
+  text("Instructions", 300, 565);
+}
+void win () {
+  background(255);
+  fill(0);
+  textSize(40);
+  text("Congratulations", 150, 100);
+  text("You Have Won!", 160, 200);
+  text("Click to return to main world.", 0, 350);
+  ellipse(500, 400, 40, 40);
+}
+void intro() {
+  background(255);
+  textSize(40);
+  text("Use the Arrow Keys and WASD", 0, 100);
+  text("to control your charcater.", 40, 150);
+  text("To purchase in the store", 50, 200);
+  text("just hit the enter key.", 80, 250);
+  text("You can jump in the levels", 40, 300);
+  text("using space bar", 130, 350);
+  text("or the up key", 150, 400);
+  text("(w or the directional arrow).", 30, 450);
+  fill(0);
+  text("Continue", 340, 515);
+  ellipse(300, 500, 40, 40);
 }

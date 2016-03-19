@@ -1,6 +1,17 @@
 //int megay=300;
+int enemy1x=860;
+int enemy1y=140;
+int enemy2x=360;
+int enemy2y=140;
+int enemy3x=500;
+int enemy3y=120;
+float ct;
 int camera2X;
 int camera2Y;
+ENEMY e1 =new ENEMY(enemy1x, enemy1y, #43F0F5);
+ENEMY e2 =new ENEMY(enemy2x, enemy2y, #43F0F5);
+ENEMY e3 =new ENEMY(enemy3x, enemy3y, #43F0F5);
+
 void page4() {
   background(255);
   mapWidth = 1100;
@@ -42,7 +53,7 @@ void page4() {
     megaVY = 0; 
     canJump = 1;
   }
-  camera2();
+
 
   if (item1Visible == 1) {
     drawItem(item1X - camera2X, item1Y - camera2Y, #FFFF00, 1);
@@ -53,9 +64,13 @@ void page4() {
   if (item3Visible == 1) {
     drawItem(item3X - camera2X, item3Y - camera2Y, #FFFF00, 3);
   }
-  enemy(enemy1x-camera2X, enemy1y);
-  enemy(enemy2x-camera2X, enemy2y);
-  enemy(enemy3x-camera2X, enemy3y);
+  //enemy(enemy1x-camera2X, enemy1y);
+  //enemy(enemy2x-camera2X, enemy2y);
+  //enemy(enemy3x-camera2X, enemy3y);
+  e1.update();
+  e2.update();
+  e3.update();
+  camera2();
   if (hitWait > 0) {
     hitWait++;
     if (hitWait > 20) {
@@ -157,48 +172,50 @@ void  drawPlatforms(int x, int y, int z) {
     }
   }
 }
-int enemy1x=860;
-int enemy1y=140;
-int enemy2x=360;
-int enemy2y=140;
-int enemy3x=500;
-int enemy3y=120;
-float ct;
-void enemy(float x, float y) {
-  ct+=.1;
-  y=y+90*cos(ct);
-  x=x+40*sin(ct);
-  ellipse(x, y, 40, 40);
-  if (dist(megax-camera2X, megay, x, y)<30) {
-    if (hitWait == 0) {
-      health-=1;
-      hitWait  = 1;
+
+class ENEMY {
+  float ex, ey;
+  int ec;
+  ENEMY(int _ex, int _ey, int _ec) {
+    ec=_ec;
+    ex=_ex;
+    ey=_ey;
+  }
+  void update() {
+    fill(ec);
+    ct+=.1;
+    ey=ey+20*cos(ct);
+    ex=ex+10*sin(ct);
+    if (page==4) {
+      ellipse(ex-camera2X, ey-camera2Y, 40, 40);
+    } else if (page==5) {
+      ellipse(ex-camera3X, ey-camera3Y, 40, 40);
     }
-  } else if (dist(megax-camera2X, megay-20, x, y)<20) {
-    if (hitWait == 0) {
-      health-=1;
-      hitWait  = 1;
-    }
-  } else if (dist(megax-camera2X, megay-40, x, y)<20) {
-    if (hitWait == 0) {
-      health-=1;
-      hitWait  = 1;
-    }
-  } else if (dist(megax-camera2X, megay-60, x, y)<20) {
-    if (hitWait == 0) {
-      health-=1;
-      hitWait  = 1;
+    if (dist(megax, megay-30, ex, ey)<40) {
+      if (hitWait == 0) {
+        health-=1;
+        hitWait  = 1;
+      }
     }
   }
 }
+
+
 void portalto2(int x, int y) {
   //  rect(x, y, 30, 70);
-  if (megax-26>1050 && megay>y && megay-60<y+60) {
+  if (page==4 && megax-26>1050 && megay>y && megay-60<y+60) {
     page=5;
     megax=180;
     megay=100;
     camera2X=0;
     camera2X=0;
+  }
+  if (page==5 && megax-26>1050 && megay>y && megay-60<y+60) {
+    page=6;
+    megax=200;
+    megay=200;
+    cameraX=0;
+    cameraX=0;
   }
 }
 void camera2() {

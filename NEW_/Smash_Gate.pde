@@ -14,7 +14,7 @@ void drawclamp(float x, int y, color c, float x2, int y2) {
   y+=cameraY;
 
   if (rect2Rect(0, y, x, 80, megax-15, megay-65, 30, 67)) {
-    println("left " + random(1));
+   // println("left " + random(1));
     //background(#FF0000);
     if (hitWait == 0) {
       health-=1;
@@ -34,7 +34,7 @@ void drawclamp(float x, int y, color c, float x2, int y2) {
 
   //rect(x-15, y-65, 30, 67);
   if (rect2Rect(x2, y2, 900, 80, megax-15, megay-65, 30, 67)) {
-    println("right: " + random(1));
+   // println("right: " + random(1));
     // background(#FF0000);
     if (hitWait == 0) {
       health-=1;
