@@ -4,7 +4,7 @@ int hitWait = 0;
 int healthmax=6;
 int healthcount=healthmax;
 int megax=200;
-
+//
 float mainy=200;
 float megay=mainy;
 int page=0;
