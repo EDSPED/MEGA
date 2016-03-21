@@ -12,6 +12,10 @@ int enemy7x=960;
 int enemy7y=140;
 int camera3X;
 int camera3Y;
+CLOUD c5 =new CLOUD(p5X, p5Y, p5W);
+CLOUD c6 =new CLOUD(p6X, p6Y, p6W);
+CLOUD c7 =new CLOUD(p7X, p7Y, p7W);
+CLOUD c8 =new CLOUD(p8X, p8Y, p8W);
 ENEMY e4 =new ENEMY(enemy4x, enemy4y, #43F0F5);
 ENEMY e5 =new ENEMY(enemy5x, enemy5y, #43F0F5);
 ENEMY e6 =new ENEMY(enemy6x, enemy6y, #43F0F5);
@@ -27,36 +31,11 @@ void page5() {
   if (goLeft == 1) 
     megax-=8;
 
-  canJump = 0;//can't jump!
+  canJump = 1;//can't jump!
   megay+=megaVY;
   megaVY+=.5;
   if (megaVY >= 10) 
     megaVY = 10;
-
-
-  //platform collisions
-  if (megax+18>p5X && megax<p5X+p5W && megay>=p5Y && megay<=p5Y+megaVY) {
-    megay=p5Y;
-    megaVY = 0; 
-    canJump = 1;
-  }
-  if (megax+9>p6X && megax-9<p6X+p6W && megay>=p6Y && megay<=p6Y+megaVY) {
-    megay=p6Y;
-    megaVY = 0; 
-    canJump = 1;
-  }
-  if (megax+9>p7X && megax-9<p7X+p7W && megay>=p7Y && megay<=p7Y+megaVY) {
-    megay=p7Y;
-    megaVY = 0; 
-    canJump = 1;
-  }
-
-  if (megax+9>p8X && megax-9<p8X+p8W && megay>=p8Y && megay<=p8Y+megaVY) {
-    megay=p8Y;
-    megaVY = 0; 
-    canJump = 1;
-  }
-
   camera3();
 
   if (item4Visible == 1) {
@@ -82,11 +61,14 @@ void page5() {
   if (healthmax==8) {
     extraheart(heartX+210-120, heartY);
   }
-  drawPlatforms(p5X-camera3X, p5Y, p5W);
-  drawPlatforms(p6X - camera3X, p6Y, p6W);
-  drawPlatforms(p7X - camera3X, p7Y, p7W);
-  drawPlatforms(p8X - camera3X, p8Y, p8W);
-
+  //drawPlatforms(p5X-camera3X, p5Y, p5W);
+  //drawPlatforms(p6X - camera3X, p6Y, p6W);
+  //drawPlatforms(p7X - camera3X, p7Y, p7W);
+  //drawPlatforms(p8X - camera3X, p8Y, p8W);
+  c5.update();
+  c6.update();
+  c7.update();
+  c8.update();
 
   boxes(p5X-camera3X, p5Y, p5W);
   boxes(p6X-camera3X, p6Y, p6W);
@@ -107,7 +89,7 @@ void page5() {
   drawcoincounter(240, 240);
 }
 void camera3() {
- // println(camera3X + "  " + megax + "   " + mapWidth+ "   " + megay);
+  // println(camera3X + "  " + megax + "   " + mapWidth+ "   " + megay);
   //horizontal camera 
   if (megax > camera3X + 240 && camera3X < (mapWidth - width)) {//ASSUMING FROG VELOCITY = 40
     camera3X = megax - 240;

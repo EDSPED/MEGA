@@ -314,7 +314,7 @@ void map1() {
   //drawFlower(700 - cameraX, 600 - cameraY, #00FFFF);
 
 
-  for (int i = 0; i < mapWidth; i+=40)
+  for (int i = 0; i < mapWidth*1.8; i+=40)
     for (int j = 0; j < mapWidth*2; j+=40)
       drawtile(i-cameraX, j-cameraY);
   /*
@@ -460,13 +460,14 @@ void drawtile(int x, int y) {
 //INPUT TAB
 
 int goRight, goLeft, goUp, goDown;
-int canJump;  
+int canJump=0;  
 float megaVY;
 void keyPressed
   () {
   if (page==4 || page==5) {
-    if (keyCode==UP ||key  == 'w' || key == ' ' && canJump ==1) {
-      goUp = 1;
+    if ((keyCode==UP ||key  == 'w' || key == ' ') && canJump ==0) {
+     // goUp = 1;
+      canJump=1;
       megaVY = -8;
     }
     if (keyCode==DOWN || key=='s') {
@@ -491,10 +492,14 @@ void keyPressed
   //  goUp = 1;
   //megaVY = -8;
   //}
-  if (page==2 && key == ENTER && shopcursorx==70+30 && coincount>=2) {
+  if (page==2 && key == ENTER && shopcursorx==70+30 && coincount>=5) {
     healthmax=8;
     health=healthmax;
     coincount-=5;
+    if(coincount<=0){
+    coincount=0;
+    }
+   
   }
   if ((key  == 'd' || keyCode == RIGHT) && page==2) {
     if (page==2) {
@@ -546,13 +551,16 @@ void keyPressed
 }
 
 void keyReleased() {
+
   if (page==4 ||page==5) {
     if (keyCode==UP||key  == 'w') {
       goUp = 0;
+      canJump=1;
     }
     if (keyCode==DOWN||key  == 's') {
       goDown = 0;
     }
+
     if (keyCode==LEFT ||key  == 'a') {
       goLeft =0;
     }
